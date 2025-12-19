@@ -33,8 +33,9 @@ async def get_menu(
     menu_id: int = Query(..., description="菜单id"),
 ):
     result = await menu_controller.get(id=menu_id)
-    return Success(data=result)
-
+    result_to_dict = await result.to_dict()
+    return Success(data=result_to_dict)
+    
 
 @router.post("/create", summary="创建菜单")
 async def create_menu(
